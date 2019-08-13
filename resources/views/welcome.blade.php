@@ -80,6 +80,15 @@
                 <div class="title m-b-md">
                     {{ config('app.name') }}
                 </div>
+                <div>
+                    <p class="h1">
+                        Welcome, <span style="color: {{ '#' . substr(md5(rand()), 0, 6) }}">{{ $tenant ?? 'to the multitenancy application' }}</span>!
+                    </p>
+
+                    {{--<p class="h1">--}}
+                        {{--Welcome, <span style="color: {{ '#' . substr(md5(rand()), 0, 6) }}">{{ $tenant }}</span>!--}}
+                    {{--</p>--}}
+                </div>
             </div>
         </div>
 

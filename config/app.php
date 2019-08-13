@@ -52,7 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://koko.io'),
+    'domain' => env('APP_DOMAIN', 'koko.io'),
+    'homepage' => env('APP_HOMEPAGE', 'http://koko.io'),
 
     /*
     |--------------------------------------------------------------------------
