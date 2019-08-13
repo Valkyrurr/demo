@@ -80,18 +80,26 @@
                 <div class="title m-b-md">
                     {{ config('app.name') }}
                 </div>
-                <div>
-                    <p class="h1">
-                        Welcome, <span style="color: {{ '#' . substr(md5(rand()), 0, 6) }}">{{ $tenant ?? 'to the multitenancy application' }}</span>!
-                    </p>
 
-                    {{--<p class="h1">--}}
-                        {{--Welcome, <span style="color: {{ '#' . substr(md5(rand()), 0, 6) }}">{{ $tenant }}</span>!--}}
-                    {{--</p>--}}
+                <div class="row">
+                    <div class="col-12">
+                        <p class="h1">
+                            Welcome, <span style="color: {{ '#' . substr(md5(rand()), 0, 6) }}">{{ $tenant ?? 'to the multitenancy application' }}</span>!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    @include('articles.table')
                 </div>
             </div>
         </div>
 
         <script src="{{ mix('/js/app.js') }}"></script>
+        @yield('pagespecificscripts')
     </body>
 </html>

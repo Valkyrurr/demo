@@ -28,8 +28,14 @@ Route::domain(config('app.domain'))->group(function() {
 
 // NOTE: activate line below to use app in a prod-like env, else, $tenant value will be available for demo purposes
 // Route::domain('{tenant}.' . 'tenancy.' . config('app.domain'))->middleware(['subdomain.resolution'])->group(function () {
-Route::domain('{tenant}.' . config('app.tenancy') . '.' . config('app.domain'))->middleware([])->group(function () {
-    Route::get('/', function ($tenant) {
+Route::domain('{tenant}.' . config('app.tenancy') . '.' . config('app.domain'))->middleware(['subdomain.resolution'])->group(function () {
+    Route::get('/', function () {
+        $hostname = app(\Hyn\Tenancy\Environment::class)->hostname();
+        $tenant = $hostname->fqdn;
+
         return view('welcome')->with(compact('tenant'));
     });
+
+    Route::get('articles/table', 'ArticleController@table')->name('articles.table');
+    Route::resource('articles', 'ArticleController');
 });

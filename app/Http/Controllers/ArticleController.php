@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use Freshbitsweb\Laratables\Laratables;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -81,5 +82,10 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         //
+    }
+
+    public function table()
+    {
+        return Laratables::recordsOf(Article::class);
     }
 }
