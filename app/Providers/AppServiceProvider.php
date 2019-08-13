@@ -13,7 +13,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Reference: https://tenancy.dev/docs/hyn/5.3/connections#forcing-the-connection
+        // "This is also helpful for 3rd party packages models to force their connection to tenant."
+        $env = app(\Hyn\Tenancy\Environment::class);
+
+        if ($fqdn = optional($env->hostname())->fqdn) {
+            config(['database.default' => 'tenant']);
+        }
     }
 
     /**

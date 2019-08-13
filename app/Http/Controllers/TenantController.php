@@ -50,7 +50,7 @@ class TenantController extends Controller
 
         // Create And Connect Hostname
         $hostname = new \Hyn\Tenancy\Models\Hostname;
-        $hostname->fqdn = $request['tenant'] . '.' . request()->getHost();
+        $hostname->fqdn = $request['tenant'] . '.' . config('app.tenancy') . '.' . request()->getHost();
         $hostname = app(\Hyn\Tenancy\Contracts\Repositories\HostnameRepository::class)->create($hostname);
         app(\Hyn\Tenancy\Contracts\Repositories\HostnameRepository::class)->attach($hostname, $website);
 
@@ -75,6 +75,8 @@ class TenantController extends Controller
         $passwordResetUrl = $request->getScheme() . "://{$hostname->fqdn}:" . $_SERVER['SERVER_PORT'] . "/password/reset/{$token}";
 
         // \Mail::send(new \App\Mail\AdministratorInvite($passwordResetUrl, $request->email));
+
+        $this->populate();
 
         return redirect(str_slug('init tenant'));
     }
@@ -122,5 +124,10 @@ class TenantController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function populate()
+    {
+        factory(\App\Article::class, rand(41, 50))->create();
     }
 }
